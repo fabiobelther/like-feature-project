@@ -1,0 +1,14 @@
+.LikeButton button {
+    margin: 10px;
+    height: 30px;
+    width: 70px;
+    border-radius: 5%;
+    background-color: #1b3a8a;
+    color: #fff;
+    font-size: 0.8rem;
+}
+
+.LikeButton label {    
+    font-size: 1.2rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
