@@ -1,70 +1,88 @@
-# Getting Started with Create React App
+# “Like” Button Feature Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The “Like” button serves two primary use cases:
+- When a user visits an article, a like button is rendered and displays the total number of likes
+- When a user clicks the like button, the count increments by one.
 
-## Available Scripts
+This project is client-side(front-end) of application. 
+To see about the server-side(back-end) go to: https://github.com/fabiobelther/LikeFeatureProject.Api.git
 
-In the project directory, you can run:
 
-### `npm start`
+## Overview
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+This project is a React implementation using Axios to server calls and was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
+## Getting Started
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To clone this project you need to install [Git](https://git-scm.com).
+To run this project you need to download [Visual Studio Code](https://code.visualstudio.com) or [Visual Studio 2019](https://visualstudio.microsoft.com/). 
+And you need to install [NodeJS](https://nodejs.org/en/download/) to run the project.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Cloning
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Go to path and run the command on GitBash terminal
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```powershell
+git clone https://github.com/fabiobelther/LikeFeatureProject.git
+```
 
-### `npm run eject`
+### Installing
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+In the project directory, execute the command to install all the dependencies:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```powershell
+npm install
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Run the Server Side
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Before you run the client-side project you need to run the server-side.
+Look the source code here: https://github.com/fabiobelther/LikeFeatureProject.Api.git
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Running
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+When the install is finished and the server-side is up, execute this command to run the projet:
 
-### Code Splitting
+```powershell
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The main page should open automatically. If not, go to:
+[http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+## Improvements
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- How can you improve the feature to make it more resilient against abuse/exploitation 
+  - To avoid abuse or the use of robots to generate a huge amount of likes in an article we could:
+    - In the front-end create a variable where we would limit the amount of likes (for example, set a maximum of 3), and after reaching the value disable the like button.
+    - We could record the ip from the user in a NoSql database like redis and with that, we would limit the amount per article or time.
+    - It was not informed that there would be an option to "dislike" in the business rule. If was possible, this action would inhibit abuse, allowing the app user to like the article just once.
+	 
+- How can you improve the feature to make it scale to millions of users and perform without issues?
+- A million concurrent users clicking the button at the same time 
+- A million concurrent users requesting the article's like count at the same time
+  - The solution was built in microservices, however the relational database can be a bottlenecked, to solve these possible problems we could:
+    - Record the current number of likes of the article in a NoSql database like redis, and according to Gets requests they would look directly at it.
+    - When making a Post, we would use a Queue as AWS SQS or Rabbit asynchronously, and when making a transaction, it would update the key in the NoSql bank.
+    - After that we would make a callback to the Front-end with the new value of likes.
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Built With
 
-### Deployment
+* [React](https://reactjs.org/) - React documentation
+* [NodeJS](https://nodejs.org/en/download/) - JavaScript runtime  - the project was created in version 12.16.1
+* [Axios](https://github.com/axios/axios) - Axios
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
+## Contributings
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Authors
+
+* **Fabio Belther** - *Initial work* - [FabioBelther](https://github.com/fabiobelther/)
+
+See also the list of [contributors](https://github.com/fabiobelther/LikeFeatureProject/contributors) who participated in this project.
